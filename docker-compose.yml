@@ -1,0 +1,16 @@
+services:
+  web:
+    build: .
+    ports:
+     - "5000:5000"
+    depends_on:
+     - redis
+    environment:
+      REDIS_HOST: redis
+  redis:
+    image: redis:alpine
+    volumes:
+     - redis_data:/data
+
+volumes:
+  redis_data:
