@@ -43,7 +43,7 @@ jobs:
 
   push:
     needs: [unit-test, smoke-test]
-    if: github.events_name == 'push'
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
       contents: read
