@@ -1,3 +1,5 @@
+[![CI](https://github.com/a-elef93/notes-api/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/a-elef93/notes-api/actions/workflows/ci.yml)
+
 # Notes API
 
 A small REST API for storing and reading notes, built with **Flask** and **Redis** and run with **Docker Compose**.
