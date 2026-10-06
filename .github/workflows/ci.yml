@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+     branches: [ main ]
+
+jobs:
+   build-and-smoke-test:
+     runs-on: ubuntu-latest
+     steps:
+     - name: Checkout code
+       uses: actions/checkout@v4
+
+     - name: Build and start services
+       run: docker compose up -d --build
+
+     - name: Smoke test
+       run: |
+         curl -sS --fail --retry 10 --retry-delay 2 --retry-all-errors localhost:5000/notes
+         curl -sS --fail -X POST localhost:5000/notes -H "Content-Type: application/json" -d '{"text":"ci smoke test"}'
+         curl localhost:5000/notes | grep -q "ci smoke test"
+
+     - name: Show logs on failure
+       if: failure()
+       run: docker compose logs
